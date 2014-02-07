@@ -1,3 +1,58 @@
+;; {{ flyspell stuff
+;; flyspell set up for org-mode
+(setq org-mode-src-block-started nil)
+(defun org-mode-is-code-block (f)
+  ;; (org-edit-src-find-region-and-lang) too slow!
+  (let (yes cur-line)
+    (cond
+      ((memq f '(org-block-begin-line
+                  ))
+       (setq cur-line (buffer-substring-no-properties
+                        (line-beginning-position)
+                        (line-end-position)))
+       ;; (message "cur-line=%s" cur-line)
+
+       (if (string-match "^[ \t]*#\\+begin_src.*" cur-line)
+         (setq org-mode-src-block-started t))
+       (setq yes t))
+      ((memq f '(org-block-end-line
+                  ))
+       (setq org-mode-src-block-started nil)
+       (setq yes t))
+      (t
+        (when org-mode-src-block-started
+          ;; (message "bye=%s" bye)
+          (setq yes t)
+          )))
+    yes
+    ))
+
+(defun org-mode-flyspell-verify ()
+  (let ((f (get-text-property (- (point) 1) 'face))
+        rlt)
+    (message "h")
+    (cond
+     ((memq f '(org-property-value
+                ))
+      (message "hi")
+      (setq rlt nil))
+     ((org-mode-is-code-block f)
+      ;; don't spell check the embedded source code
+      (setq rlt nil))
+     (t
+      (setq rlt t)))
+    rlt
+    ))
+
+(defun flyspell-org-mode ()
+  "Turn of `flyspell-mode' for org-mode"
+  (interactive)
+  (setq flyspell-generic-check-word-predicate
+        'org-mode-flyspell-verify)
+  (flyspell-mode 1)
+  )
+;; }}
+
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 
@@ -121,6 +176,7 @@
       (add-hook 'org-mode-hook '(lambda ()
                                   (setq evil-auto-indent nil)
                                   (soft-wrap-lines)
+                                  (flyspell-org-mode)
                                   ))))
 
 (defadvice org-open-at-point (around org-open-at-point-choose-browser activate)
