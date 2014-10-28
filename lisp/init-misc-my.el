@@ -12,4 +12,16 @@
 
 (global-set-key "\M-s" 'save-buffer)
 
+; evil-key-binding
+; https://github.com/mbriggs/.emacs.d/blob/master/init/init-keymaps.el
+(evil-define-key 'normal global-map
+  (kbd "M-<backspace>") 'kill-whole-line
+  (kbd "M-v") 'yank)
+
+(evil-define-key 'insert global-map
+  (kbd "M-J") 'evil-join
+  (kbd "M-v") 'yank
+  (kbd "M-S-<return>") 'evil-open-above
+  (kbd "M-<return>") 'evil-open-below)
+
 (provide 'init-misc-my)
