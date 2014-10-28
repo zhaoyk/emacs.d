@@ -137,6 +137,7 @@
 (load-theme 'sanityinc-solarized-dark t)
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
+(require 'init-misc-my)
 
 (setq idle-require-idle-delay 3)
 (setq idle-require-symbols '(init-lisp

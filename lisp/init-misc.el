@@ -3,7 +3,7 @@
 ;;----------------------------------------------------------------------------
 (setq-default
  blink-cursor-delay 0
- blink-cursor-interval 0.4
+ blink-cursor-interval 0.8
  bookmark-default-file "~/.emacs.d/.bookmarks.el"
  buffers-menu-max-size 30
  case-fold-search t
@@ -309,7 +309,6 @@ grab matched string, jsonize them, and insert into kill ring"
 ;effective emacs item 3
 (global-set-key "\C-s" 'isearch-forward-regexp)
 ; (global-set-key "\M-s" 'isearch-backward-regexp)
-(global-set-key "\M-s" 'save-buffer)
 (global-set-key "\C-\M-s" 'tags-search)
 (global-set-key "\C-x\C-n" 'find-file-other-frame) ;open new frame with a file
 
