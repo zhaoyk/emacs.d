@@ -130,9 +130,11 @@
 (require 'init-eim) ;;  cannot be idle-required
 
 ;; color theme
-(require 'color-theme)
-(require 'color-theme-molokai)
-(color-theme-molokai)
+;; (require 'color-theme)
+;; (require 'color-theme-molokai)
+;; (color-theme-molokai)
+;; package-install color-theme-solarized
+(load-theme 'sanityinc-solarized-dark t)
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
 
