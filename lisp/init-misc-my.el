@@ -21,6 +21,10 @@
 (evil-define-key 'insert global-map
   (kbd "M-J") 'evil-join
   (kbd "M-v") 'yank
+  (kbd "M-h") 'evil-backward-char
+  (kbd "M-l") 'evil-forward-char
+  (kbd "M-j") 'evil-next-line
+  (kbd "M-k") 'evil-previous-line
   (kbd "M-S-<return>") 'evil-open-above
   (kbd "M-<return>") 'evil-open-below)
 

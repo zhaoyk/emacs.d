@@ -133,8 +133,8 @@
 ;; (require 'color-theme)
 ;; (require 'color-theme-molokai)
 ;; (color-theme-molokai)
-;; package-install color-theme-solarized
-(load-theme 'sanityinc-solarized-dark t)
+(require 'monokai-theme)
+(load-theme 'monokai t)
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
 (require 'init-misc-my)
