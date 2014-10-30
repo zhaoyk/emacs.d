@@ -9,6 +9,8 @@
 (setq ring-bell-function 'my-bell-function)
 ; turns off auto-save
 (setq auto-save-default nil)
+; change frame title: name (path)
+(setq-default frame-title-format "%b (%f)")
 
 (global-set-key "\M-s" 'save-buffer)
 (global-set-key "\M-L" 'indent-buffer)
