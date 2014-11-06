@@ -140,7 +140,8 @@
 (require 'init-misc-my)
 
 (setq idle-require-idle-delay 3)
-(setq idle-require-symbols '(init-lisp
+(setq idle-require-symbols '(init-writting
+                             init-lisp
                              init-keyfreq
                              init-elnode
                              init-doxygen
