@@ -40,8 +40,8 @@ Also converts full stops to commas."
       (call-interactively 'upcase-region)
     (call-interactively 'subword-upcase)))
 
-(global-set-key "\M-c" 'endless/capitalize)
-(global-set-key "\M-l" 'endless/downcase)
-(global-set-key "\M-u" 'endless/upcase)
+;(global-set-key "\M-c" 'endless/capitalize)
+;(global-set-key "\M-l" 'endless/downcase)
+;(global-set-key "\M-u" 'endless/upcase)
 
 (provide 'init-writting)
