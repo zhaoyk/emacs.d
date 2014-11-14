@@ -7,6 +7,8 @@
               backward-char forward-char))
     (ding)))
 (setq ring-bell-function 'my-bell-function)
+; 下划线 _ 是单词的一部分(搜索替换时很有用)
+(modify-syntax-entry ?_ "w")
 ; turns off auto-save
 (setq auto-save-default nil)
 ; change frame title: name (path)
@@ -35,6 +37,9 @@
   (kbd "M-S-<return>") 'evil-open-above
   (kbd "M-<return>") 'evil-open-below)
 
+(evil-leader/set-key
+  "=" '(lambda () (interactive) (diff-buffer-with-file (current-buffer)))
+  )
 ; in macos change helm grep to ggrep
 (when (and *is-a-mac* (executable-find "ggrep"))
   (setq helm-grep-default-command "ggrep -a -d skip %e -n%cH -e %p %f"
