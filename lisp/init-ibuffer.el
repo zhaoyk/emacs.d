@@ -46,6 +46,7 @@
                     ("dired" (or (mode . dired-mode)
                                  (mode . sr-mode)
                                  ))
+                    ("markdown" (mode . markdown-mode))
                     ("erc" (mode . erc-mode))
                     ("planner" (or
                                 (name . "^\\*Calendar\\*$")
