@@ -23,6 +23,7 @@
 ; evil-key-binding
 ; https://github.com/mbriggs/.emacs.d/blob/master/init/init-keymaps.el
 (evil-define-key 'normal global-map
+  (kbd "C-]") 'ggtags-find-tag-dwim
   (kbd "C-y") 'evil-scroll-up)
 
 (evil-define-key 'insert global-map
@@ -31,7 +32,7 @@
   (kbd "M-h") 'evil-backward-char
   (kbd "M-l") 'evil-forward-char
   (kbd "M-j") 'evil-next-line
-  (kbd "M-k") 'evil-previous-line
+  (kbd "M-k") 'evil-previous-linegt
   (kbd "M-p") 'evil-paste-after
   (kbd "M-P") 'evil-paste-before
   (kbd "M-S-<return>") 'evil-open-above
