@@ -43,5 +43,6 @@ org-clock-save.el
 emms/
 projectile-bookmarks.eld
 history
-ido.last
 recentf
+places
+ido.last
