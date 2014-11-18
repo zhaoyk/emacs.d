@@ -10,7 +10,7 @@
 (defun my-c-mode-hook ()
   ;; @see http://stackoverflow.com/questions/3509919/ \
   ;; emacs-c-opening-corresponding-header-file
-  (local-set-key (kbd "C-x C-o") 'ff-find-other-file)
+  (local-set-key (kbd "C-c C-o") 'ff-find-other-file)
   (local-set-key "\M-f" 'c-forward-into-nomenclature)
   (local-set-key "\M-b" 'c-backward-into-nomenclature)
   (setq cc-search-directories '("." "/usr/include" "/usr/local/include/*" "../*/include" "$WXWIN/include"))
