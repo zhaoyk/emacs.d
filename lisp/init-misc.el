@@ -1066,7 +1066,7 @@ The full path into relative path insert it as a local file link in org-mode"
 ;; someone mentioned that blink cursor could slow Emacs24.4
 ;; I couldn't care less about cursor, so turn it off explicitly
 ;; https://github.com/redguardtoo/emacs.d/issues/208
-(blink-cursor-mode -1)
+;(blink-cursor-mode -1)
 
 ;; https://github.com/browse-kill-ring/browse-kill-ring
 (require 'browse-kill-ring)
