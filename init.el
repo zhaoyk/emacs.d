@@ -128,7 +128,7 @@
 (require 'init-stripe-buffer)
 (require 'init-eim) ;;  cannot be idle-required
 (require 'init-hs-minor-mode)
-
+(require 'init-shaderlab-mode)
 
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
