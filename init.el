@@ -94,7 +94,6 @@
   (require 'init-org)
   (require 'init-org-mime))
 (require 'init-css)
-(require 'init-haml)
 (require 'init-python-mode)
 (require 'init-haskell)
 (require 'init-ruby-mode)
@@ -130,14 +129,18 @@
 (require 'init-eim) ;;  cannot be idle-required
 (require 'init-hs-minor-mode)
 
+
+;; misc has some crucial tools I need immediately
+(require 'init-misc)
+
 ;; color theme
 ;; (require 'color-theme)
 ;; (require 'color-theme-molokai)
 ;; (color-theme-molokai)
 (require 'monokai-theme)
 (load-theme 'monokai t)
-;; misc has some crucial tools I need immediately
-(require 'init-misc)
+;; (color-theme-select 'color-theme-xp)
+;; (color-theme-xp)
 (require 'init-misc-my)
 
 (setq idle-require-idle-delay 3)
@@ -163,24 +166,7 @@
     (time-to-seconds (time-since emacs-load-start-time)))
    )
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/.bookmarks.el")
- '(quack-programs
-   (quote
-    ("mzscheme" "bigloo" "csi" "csi -hygienic" "gosh" "gracket" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "racket" "racket -il typed/racket" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
- '(safe-local-variable-values
-   (quote
-    ((emacs-lisp-docstring-fill-column . 75)
-     (ruby-compilation-executable . "ruby")
-     (ruby-compilation-executable . "ruby1.8")
-     (ruby-compilation-executable . "ruby1.9")
-     (ruby-compilation-executable . "rbx")
-     (ruby-compilation-executable . "jruby"))))
- '(session-use-package t nil (session)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

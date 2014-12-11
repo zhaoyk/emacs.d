@@ -12,6 +12,13 @@
 (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
 ;; }}
 
+;; {{ https://github.com/syl20bnr/evil-escape
+(require 'evil-escape)
+;; key-chord is used by evil-escape
+(setq key-chord-two-keys-delay 0.5)
+(evil-escape-mode 1)
+;; }}
+
 ;; Move back the cursor one position when exiting insert mode
 (setq evil-move-cursor-back t)
 
@@ -51,6 +58,7 @@
         (direx:direx-mode . emacs)
         (yari-mode . emacs)
         (erc-mode . emacs)
+        (w3m-mode . emacs)
         (gud-mode . emacs)
         (help-mode . emacs)
         (eshell-mode . emacs)
@@ -88,32 +96,35 @@
 (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
 (define-key evil-normal-state-map "go" 'goto-char)
 (define-key evil-normal-state-map (kbd "M-y") 'browse-kill-ring)
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
 ;; {{ evil-matchit
 (require 'evil-matchit)
 (global-evil-matchit-mode 1)
 ;; }}
 
-(eval-after-load "evil" '(setq expand-region-contract-fast-key "z"))
+(eval-after-load "evil"
+  '(setq expand-region-contract-fast-key "z"))
 
 ;; @see http://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
 ;; @see http://zuttobenkyou.wordpress.com/2011/02/15/some-thoughts-on-emacs-and-vim/
-(define-key evil-insert-state-map "k" #'cofi/maybe-exit)
-(evil-define-command cofi/maybe-exit ()
-  :repeat change
-  (interactive)
-  (let ((modified (buffer-modified-p)))
-    (insert "k")
-    (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
-               nil 0.5)))
-      (cond
-       ((null evt) (message ""))
-       ((and (integerp evt) (char-equal evt ?j))
-    (delete-char -1)
-    (set-buffer-modified-p modified)
-    (push 'escape unread-command-events))
-       (t (setq unread-command-events (append unread-command-events
-                          (list evt))))))))
+;; (define-key evil-insert-state-map "k" #'cofi/maybe-exit)
+;; (evil-define-command cofi/maybe-exit ()
+;;   :repeat change
+;;   (interactive)
+;;   (let ((modified (buffer-modified-p)))
+;;     (insert "k")
+;;     (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
+;;                nil 0.5)))
+;;       (cond
+;;        ((null evt) (message ""))
+;;        ((and (integerp evt) (char-equal evt ?j))
+;;     (delete-char -1)
+;;     (set-buffer-modified-p modified)
+;;     (push 'escape unread-command-events))
+;;        (t (setq unread-command-events (append unread-command-events
+;;                           (list evt))))))))
 
 
 (define-key evil-insert-state-map (kbd "M-a") 'move-beginning-of-line)
@@ -126,6 +137,18 @@
 (define-key evil-insert-state-map (kbd "M-j") 'my-yas-expand)
 (define-key evil-emacs-state-map (kbd "M-j") 'my-yas-expand)
 (global-set-key (kbd "M-k") 'keyboard-quit)
+(global-set-key (kbd "C-r") 'undo-tree-redo)
+
+;; esc quits
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
 
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
@@ -201,6 +224,7 @@ to replace the symbol under cursor"
   ;; "cp" 'evilnc-comment-or-uncomment-paragraphs
   "cd" 'evilcvn-change-symbol-in-defun
   "cb" 'evilcvn-change-symbol-in-whole-buffer
+  "yy" 'cb-switch-between-controller-and-view
   "tt" 'ido-goto-symbol ;; same as my vim hotkey
   "ht" 'helm-etags-select
   "hm" 'helm-bookmarks
@@ -246,7 +270,10 @@ to replace the symbol under cursor"
   "gsr" '(lambda () (interactive) (git-gutter:set-start-revision nil)
            (message "git-gutter reset")) ;; reset
   "hr" 'helm-recentf
+  "di" 'evilmi-delete-items
+  "si" 'evilmi-select-items
   "jb" 'js-beautify
+  "jpp" 'jsons-print-path
   "se" 'string-edit-at-point
   "s0" 'delete-window
   "s1" 'delete-other-windows
@@ -294,6 +321,8 @@ to replace the symbol under cursor"
   "fb" 'flyspell-buffer
   "fe" 'flyspell-goto-next-error
   "fa" 'flyspell-auto-correct-word
+  "pe" 'flymake-goto-prev-error
+  "ne" 'flymake-goto-next-error
   "fw" 'ispell-word
   "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
   "ma" 'mc/mark-all-like-this-in-defun
@@ -365,6 +394,7 @@ to replace the symbol under cursor"
   "xnr" 'narrow-to-region
   "xw" 'widen
   "xd" 'narrow-to-defun
+  "ycr" (lambda () (interactive) (yas-compile-directory (file-truename "~/.emacs.d/snippets")) (yas-reload-all))
   "zc" 'wg-create-workgroup
   "zk" 'wg-kill-workgroup
   "zv" '(lambda (wg)
