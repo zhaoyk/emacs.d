@@ -129,6 +129,8 @@
 (require 'init-eim) ;;  cannot be idle-required
 (require 'init-hs-minor-mode)
 (require 'init-shaderlab-mode)
+;; need statistics of keyfreq asap
+(require 'init-keyfreq)
 
 ;; misc has some crucial tools I need immediately
 (require 'init-misc)
@@ -146,7 +148,6 @@
 (setq idle-require-idle-delay 3)
 (setq idle-require-symbols '(init-writting
                              init-lisp
-                             init-keyfreq
                              init-elnode
                              init-doxygen
                              init-pomodoro
